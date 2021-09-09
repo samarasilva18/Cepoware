@@ -1,0 +1,122 @@
+
+<!-- Isso é uma tag <html>
+    Na tag <head> ficam as configurações do meu documento
+    Na tag <body> fica todo o conteúdo visível na página -->
+
+    <!-- Esse é um comentário!
+        HTML
+
+        Hyper
+            Hiper
+
+        Text
+            Texto
+
+            HyperText era uma tag <a> antigamente
+
+        Markup
+            Marcação
+
+        Language
+            Linguagem
+
+        Ou seja,
+        HyperText Markup Language
+        Linguagem de Marcação de HiperTexto
+    -->
+
+<!DOCTYPE html>
+<html lang="pt_br"> <!-- Lang é um atributo -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cepoware | Cadastro de Clientes</title>
+
+    <link rel="shortcut icon" href="/public/images/favicon.png" type="image/png">
+
+    <link rel="stylesheet" href="/public/styles/main.css">
+    <link rel="stylesheet" href="/public/styles/partials/header.css">
+    <link rel="stylesheet" href="/public/styles/partials/forms.css">
+    <link rel="stylesheet" href="/public/styles/partials/page-client-register.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+
+    <script src="/public/scripts/addField.js" defer></script>
+
+</head>
+<body id="page-client-register">
+
+    <div id="container">
+        <header class="page-header">
+            <div class="top-bar-container">
+                <a href="/src/views/clients.html">
+                <img src="/public/images/icons/back.png" alt="Voltar"></a>
+                <img src="/public/images/logo.png" alt="Cepoware">
+            </div>
+
+            <div class="header-content">
+                <strong>Cadastro de Clientes:</strong>
+                <p>Preencha os campos para inserir o novo cliente.</p>
+            </div>
+        </header>
+
+        <main>
+            <form action="/save-client" id="create-client" method="POST">
+                <fieldset>
+                    <legend>Dados do cliente:</legend>
+                    <div class="input-block">
+                        <label for="name">Nome completo:</label>
+                        <input name="name" id="name" required>
+                    </div>
+
+                    <div class="input-block" id="phonenumber">
+                        <label for="phone">Telefone <small>(Somente números):</small>
+                            <button type="button" id="add-phone">+ Novo Telefone</button>
+                        </label>
+                        <input name="phone" id="phone" type="number" required>
+                    </div>
+                </fieldset>
+
+                <fieldset id="address-items">
+                    <legend>Endereço:</legend>
+                    <div class="address-item">
+                    <div class="input-block">
+                        <label for="street">Rua:</label>
+                        <input name="street" id="street" required>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="neighborhood">Bairro:</label>
+                        <input name="neighborhood" id="neighborhood" required>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="number">Número:</label>
+                        <input name="number" id="number" required>
+                    </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+                <div class="input-block">
+                    <label for="avatar">Link do ícone:<small> *Opcional (Comece com https://):</small></label>
+                    <input name="avatar" id="avatar" type="url">
+                </div>
+                </fieldset>
+            </form>
+
+            <footer>
+                <p>
+                    <img src="/public/images/icons/warning.svg" alt="Aviso Importante">
+                    Importante! <br>
+                    Preencha todos os dados.
+                </p>
+                <button type="submit" form="create-client">Salvar Cadastro</button>
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+</html>
