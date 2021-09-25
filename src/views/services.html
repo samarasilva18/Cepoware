@@ -32,12 +32,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cepoware | Opções de Serviços</title>
 
-    <link rel="shortcut icon" href="/public/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 
-    <link rel="stylesheet" href="/public/styles/main.css">
-    <link rel="stylesheet" href="/public/styles/partials/header.css">
-    <link rel="stylesheet" href="/public/styles/partials/forms.css">
-    <link rel="stylesheet" href="/public/styles/partials/page-services.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/partials/header.css">
+    <link rel="stylesheet" href="/styles/partials/forms.css">
+    <link rel="stylesheet" href="/styles/partials/page-services.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
 
@@ -47,9 +47,9 @@
     <div id="container">
         <header class="page-header">
             <div class="top-bar-container">
-                <a href="/src/views/index.html">
-                <img src="/public/images/icons/back.png" alt="Voltar"></a>
-                <img src="/public/images/logo.png" alt="Cepoware">
+                <a href="/">
+                <img src="/images/icons/back.png" alt="Voltar"></a>
+                <img src="/images/logo.png" alt="Cepoware">
             </div>
             <div class="header-content">
                 <div class=upper-content>
@@ -63,13 +63,13 @@
                 </a>
                 </div>
                 <form id="filter-services">
-                        <a class="add"> + Novo Serviço</a>
+                        <a class="add" href="/services-register"> + Novo Serviço</a>
                     <div class="select-block">
                         <select name="filter" id="filter">
                             <option value="" disabled="" hidden="">Filtrar Por</option>
 
-                            {%for filter in filters %}
-                                <option value="{{loop.index}}" {{ "selected" if filters.filter == loop.index }} > Filtrar Por
+                            {%for filtro in filtros %}
+                                <option value="{{loop.index}}" {{ "selected" if filters.filtro == loop.index }} > Filtrar Por
                                 </option>
                             {%endfor%}
 

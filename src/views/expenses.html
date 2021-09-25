@@ -1,0 +1,129 @@
+
+<!-- Isso é uma tag <html>
+    Na tag <head> ficam as configurações do meu documento
+    Na tag <body> fica todo o conteúdo visível na página -->
+
+    <!-- Esse é um comentário!
+        HTML
+
+        Hyper
+            Hiper
+
+        Text
+            Texto
+
+            HyperText era uma tag <a> antigamente
+
+        Markup
+            Marcação
+
+        Language
+            Linguagem
+
+        Ou seja,
+        HyperText Markup Language
+        Linguagem de Marcação de HiperTexto
+    -->
+
+    <!DOCTYPE html>
+    <html lang="pt_br"> <!-- Lang é um atributo -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cepoware | Opções de Gastos</title>
+    
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+    
+        <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/partials/header.css">
+        <link rel="stylesheet" href="/styles/partials/forms.css">
+        <link rel="stylesheet" href="/styles/partials/page-services.css">
+    
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+    
+    </head>
+    <body id="page-services">
+    
+        <div id="container">
+            <header class="page-header">
+                <div class="top-bar-container">
+                    <a href="/">
+                    <img src="/images/icons/back.png" alt="Voltar"></a>
+                    <img src="/images/logo.png" alt="Cepoware">
+                </div>
+                <div class="header-content">
+                    <div class=upper-content>
+                    <strong>Lista de Gastos:</strong> <br>
+                    <a>Todos os gastos cadastrados até o momento.</a> <br>
+                    <a class="total">
+                        Total Gasto:
+                    </a>
+                    <a class="total-value2">
+                        - R$ -------
+                    </a>
+                    </div>
+                    <form id="filter-services">
+                            <a class="add" href="/expenses-register"> + Novo Gasto</a>
+                        <div class="select-block">
+                            <select name="filter" id="filter">
+                                <option value="" disabled="" hidden="">Filtrar Por</option>
+    
+                                {%for filtro in filtros %}
+                                    <option value="{{loop.index}}" {{ "selected" if filters.filtro == loop.index }} > Filtrar Por
+                                    </option>
+                                {%endfor%}
+    
+                            </select>
+                        </div>
+                        <div class="select-block">
+                            <select name="order" id="order">
+                                <option value="" disabled="" hidden="">Ordenar Por</option>
+    
+                                {%for order in orders %}
+                                    <option value="{{loop.index}}" {{ "selected" if filters.order == loop.index }} > Ordenar Por
+                                    </option>
+                                {%endfor%}
+    
+                            </select>
+                        </div>
+                        <button class="send" type="submit">Enviar</button>
+                    </form>
+                </div>
+            </header>
+    
+            <main>
+    <!--
+                {% if services == "" %}
+    -->
+                    <p class="no-results"> Nenhum gasto encontrado com a sua pesquisa.</p>
+    <!--
+                {%else%}
+    
+                    {%for service in services %}
+                        <article class="service-item">
+                    <header>
+                        <img 
+                            src="{{service.avatar}}" 
+                            alt="{{service.name}}">
+                        <div>
+                            <strong>{{service.name}}</strong>
+                            <span>{{service.telephone}}</span>
+                        </div>
+                    </header>
+                
+                    <p>{{service.address}}</p>
+                
+                    <footer>
+                        <p>Preço<strong>R$ {{service.cost}}</strong>
+                        </p>
+                    </footer>
+                        </article>
+                    {%endfor%}
+    
+                {% endif %}
+    -->
+            </main>
+        </div>
+    
+    </body>
+    </html>

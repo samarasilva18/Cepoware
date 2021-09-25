@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dependencies": "0.0.1",
     "express": "^4.17.1",
+    "jshint": "^2.13.0",
     "nunjucks": "^3.2.2",
     "sqlite-async": "^1.1.0"
   },

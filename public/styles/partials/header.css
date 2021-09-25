@@ -42,8 +42,19 @@
     padding-right: 1rem;
  }
 
+ .page-header .total-value2 {
+    background-color: var(--color-title-in-primary);
+    border-radius: .8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+ }
+
 .page-header .header-content .total-value {
     color: var(--color-secondary);
+}
+
+.page-header .header-content .total-value2 {
+    color: var(--color-primary-dark);
 }
 
 .page-header .header-content {
@@ -99,7 +110,7 @@
         max-width: 350px;
     }
 
-    .page-header .upper-content .total-value {
+    .page-header .upper-content .total-value, .total-value2 {
         max-width: 200px;
     }
 }

@@ -1,0 +1,152 @@
+
+<!-- Isso é uma tag <html>
+    Na tag <head> ficam as configurações do meu documento
+    Na tag <body> fica todo o conteúdo visível na página -->
+
+    <!-- Esse é um comentário!
+        HTML
+
+        Hyper
+            Hiper
+
+        Text
+            Texto
+
+            HyperText era uma tag <a> antigamente
+
+        Markup
+            Marcação
+
+        Language
+            Linguagem
+
+        Ou seja,
+        HyperText Markup Language
+        Linguagem de Marcação de HiperTexto
+    -->
+
+    <!DOCTYPE html>
+    <html lang="pt_br"> <!-- Lang é um atributo -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cepoware | Cadastro de Serviços</title>
+    
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+    
+        <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/partials/header.css">
+        <link rel="stylesheet" href="/styles/partials/forms.css">
+        <link rel="stylesheet" href="/styles/partials/page-client-register.css">
+    
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+    
+        <script src="/scripts/addField.js" defer></script>
+    
+    </head>
+    <body id="page-client-register">
+    
+        <div id="container">
+            <header class="page-header">
+                <div class="top-bar-container">
+                    <a href="/services">
+                    <img src="/images/icons/back.png" alt="Voltar"></a>
+                    <img src="/images/logo.png" alt="Cepoware">
+                </div>
+    
+                <div class="header-content">
+                    <strong>Cadastro de Serviços:</strong>
+                    <p>Preencha os campos para inserir um novo serviço.</p>
+                </div>
+            </header>
+    
+            <main>
+                <form action="/save-client" id="create-client" method="POST">
+                    <fieldset>
+                        <legend>Sobre o Serviço:</legend>
+                        <div class="radio-block">
+                        <a class="mensal-label">O serviço é mensal?</a>
+                        <a>
+                            <a class="radio-button"><label> Não <input type="radio" name="mensal" id="mensal" required> </label> </a> <a class="radio-button"> <label> Sim <input type="radio" name="mensal" id="mensal" required></label> </a>
+                        </a>
+                        </div>
+                        <div class="input-block" id="phonenumber">
+                            <label for="phone">Valor:</label>
+                            <input name="phone" id="phone" type="number" required>
+                        </div>
+                        <div class="select-block">
+                            <label for="subject">Tipo de Cepo:
+                                <a href="/newtype-register">+ Novo Tipo de Cepo</a>
+                            </label>
+                            <select name="subject" id="subject" required>
+                                <option value="">Selecione uma opção</option>
+                                {%for subject in subjects %}
+                                    <option value="{{loop.index}}" {{ "selected" if filters.subject == loop.index }} > {{subject}}
+                                    </option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="select-block">
+                            <label for="subject">Cliente:</label>
+                            <select name="subject" id="subject" required>
+                                <option value="">Selecione uma opção</option>
+                                {%for subject in subjects %}
+                                    <option value="{{loop.index}}" {{ "selected" if filters.subject == loop.index }} > {{subject}}
+                                    </option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </fieldset>
+    
+                    <fieldset id="address-items">
+                        <legend>Data de Entrega:</legend>
+                        <div class="address-item">
+                        <div class="input-block">
+                            <label for="street">Dia:</label>
+                            <input name="street" id="street" required>
+                        </div>
+    
+                        <div class="input-block">
+                            <label for="neighborhood">Mês:</label>
+                            <input name="neighborhood" id="neighborhood" required>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="address-items">
+                        <legend>Data de Pagamento:</legend>
+                        <div class="address-item">
+                        <div class="input-block">
+                            <label for="street">Dia:</label>
+                            <input name="street" id="street" required>
+                        </div>
+    
+                        <div class="input-block">
+                            <label for="neighborhood">Mês:</label>
+                            <input name="neighborhood" id="neighborhood" required>
+                        </div>
+                        </div>
+    
+                    </fieldset>
+    
+                    <fieldset>
+                    <div class="input-block">
+                        <label for="avatar">Link do ícone:<small> *Opcional (Comece com https://):</small></label>
+                        <input name="avatar" id="avatar" type="url">
+                    </div>
+                    </fieldset>
+                </form>
+    
+                <footer>
+                    <p>
+                        <img src="/images/icons/warning.svg" alt="Aviso Importante">
+                        Importante! <br>
+                        Preencha todos os dados.
+                    </p>
+                    <button type="submit" form="create-client">Salvar Serviço</button>
+                </footer>
+    
+            </main>
+        </div>
+    
+    </body>
+    </html>

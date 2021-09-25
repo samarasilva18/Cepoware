@@ -1,97 +1,123 @@
+/*jshint esversion: 8 */
 //Dados
 const Database = require('./database/db')
 
-const { subjects, weekdays, getSubject, convertHoursToMinutes} = require('./utils/format')
+const { filtros, orders} = require('./utils/format')
 
 function pageLanding(req, res){
     return res.render("index.html")
 }
 
-async function pageStudy(req, res) {
+async function pageClients(req, res) {
     const filters = req.query
 
-    if (!filters.subject || !filters.weekday || !filters.time) {
-        return res.render("study.html", { filters, subjects, weekdays })
+    if (!filters.filtros || !filters.orders) {
+        return res.render("clients.html", { filters, filtros, orders })
     }
 
-    //Converter horas em minutos
-    const timeToMinutes = convertHoursToMinutes(filters.time)
-
     const query = `
-        SELECT classes.*, proffys.*
-        FROM proffys
-        JOIN classes ON (classes.proffy_id = proffys.id)
-        WHERE EXISTS(
-            SELECT class_schedule.*
-            FROM class_schedule
-            WHERE class_schedule.class_id = classes.id
-            AND class_schedule.weekday = ${filters.weekday}
-            AND class_schedule.time_from <= ${timeToMinutes}
-            AND class_schedule.time_to > ${timeToMinutes}
-        )
-        AND classes.subject = '${filters.subject}'
+        SELECT clientstorage.*, clients.*
+        FROM clients
     `
     //Caso haja erro na hora da consulta ao banco de dados
     try {
         const db = await Database
-        const proffys = await db.all(query)
+        const clients = await db.all(query)
 
-        proffys.map((proffy) => {
-            proffy.subject = getSubject(proffy.subject)
+        clients.map((client) => {
+            client.filter = getFilter(client.filter)
         })
 
-        return res.render('study.html', { proffys, subjects, filters, weekdays })
+        return res.render('clients.html', { clients, filtros, filters, orders })
 
     } catch (error) {
         console.log(error)
     }
 }
 
-function pageGiveClasses(req, res) {
-    return res.render("give-classes.html", {subjects, weekdays})
+function pageClientRegister(req, res) {
+    return res.render("client-register.html")
 }
 
-async function saveClasses(req, res) {
-    const createProffy = require('./database/createProffy')
+async function saveClients(req, res) {
+    const createClient = require('./database/createClient')
 
-    const proffyValue = {
+    const clientValue = {
         name: req.body.name,
         avatar: req.body.avatar,
-        whatsapp: req.body.whatsapp,
+        phone: req.body.phone,
         bio: req.body.bio
     }
 
-    const classValue = {
-        subject: req.body.subject,
-        cost: req.body.cost
-    }
-
-    const classScheduleValues = req.body.weekday.map((weekday, index) => {
-        return {
-            weekday, 
-            time_from: convertHoursToMinutes(req.body.time_from[index]), 
-            time_to: convertHoursToMinutes(req.body.time_to[index])
-        }
-    })
     try {
         const db = await Database
-        await createProffy(db, { proffyValue, classValue, classScheduleValues })
+        await createClient(db, { clientValue })
         
-        let queryString = "?subject=" + req.body.subject
+        let queryString = "?filtros=" + req.body.filtros
 
-        queryString += + "&weekday=" + req.body.weekday[0]
-        
-        queryString += + "&time=" + req.body.time_from[0]
+        queryString += + "&order=" + req.body.order
 
-        return res.redirect("/study" + queryString)
+        return res.redirect("/clients" + queryString)
     } catch (error) {
         console.log(error)
     }
+}
+
+async function pageServices(req, res){
+    const filters = req.query
+    
+    if (!filters.filtros || !filters.orders) {
+        return res.render("services.html",{filtros, filters, orders })
+    }
+
+    const query = `
+        SELECT servicestorage.*, services.*
+        FROM services
+    `
+    //Caso haja erro na hora da consulta ao banco de dados
+    try {
+        const db = await Database
+        const services = await db.all(query)
+
+        services.map((service) => {
+            service.filter = getFilter(service.filter)
+        })
+
+        return res.render('services.html', { services, filtros, filters, orders })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+function pageServicesRegister(req, res){
+    return res.render("services-register.html")
+}
+
+function pageExpenses(req, res){
+    const filters = req.query
+    
+    if (!filters.filtros || !filters.orders) {
+        return res.render("expenses.html", { filters, filtros, orders })
+    }
+}
+
+function pageExpensesRegister(req, res){
+    return res.render("expenses-register.html")
+}
+
+function pageNewTypeRegister(req, res){
+    return res.render("newtype-register.html")
 }
 
 module.exports = {
     pageLanding,
-    pageStudy,
-    pageGiveClasses,
-    saveClasses
+    pageClients,
+    pageClientRegister,
+    saveClients,
+    pageServices,
+    pageServicesRegister,
+    pageNewTypeRegister,
+    pageExpenses,
+    pageExpensesRegister
 }

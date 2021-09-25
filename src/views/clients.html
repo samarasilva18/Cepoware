@@ -30,14 +30,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cepoware | Opções de Clientes</title>
+    <title>Cepoware | Lista de Clientes</title>
 
-    <link rel="shortcut icon" href="/public/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 
-    <link rel="stylesheet" href="/public/styles/main.css">
-    <link rel="stylesheet" href="/public/styles/partials/header.css">
-    <link rel="stylesheet" href="/public/styles/partials/forms.css">
-    <link rel="stylesheet" href="/public/styles/partials/page-clients.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/partials/header.css">
+    <link rel="stylesheet" href="/styles/partials/forms.css">
+    <link rel="stylesheet" href="/styles/partials/page-clients.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
 
@@ -47,9 +47,9 @@
     <div id="container">
         <header class="page-header">
             <div class="top-bar-container">
-                <a href="/src/views/index.html">
-                <img src="/public/images/icons/back.png" alt="Voltar"></a>
-                <img src="/public/images/logo.png" alt="Cepoware">
+                <a href="/">
+                <img src="/images/icons/back.png" alt="Voltar"></a>
+                <img src="/images/logo.png" alt="Cepoware">
             </div>
             <div class="header-content">
                 <div class=upper-content>
@@ -57,13 +57,13 @@
                 <a>Todos os clientes cadastrados até o momento.</a> <br>
                 </div>
                 <form id="filter-clients">
-                        <a class="add" href="/src/views/client-register.html"> + Novo Cliente</a>
+                        <a class="add" href="/client-register"> + Novo Cliente</a>
                     <div class="select-block">
-                        <select name="filter" id="filter">
+                        <select name="filtro" id="filtro">
                             <option value="" disabled="" hidden="">Filtrar Por</option>
 
-                            {%for filter in filters %}
-                                <option value="{{loop.index}}" {{ "selected" if filters.filter == loop.index }} > Filtrar Por
+                            {%for filtro in filtros %}
+                                <option value="{{loop.index}}" {{ "selected" if filters.filtro == loop.index }} > Filtrar Por
                                 </option>
                             {%endfor%}
 
@@ -86,29 +86,26 @@
         </header>
 
         <main>
-<!--
-            {% if services == "" %}
--->
+            {% if clients == "" %}
                 <p class="no-results"> Nenhum cliente encontrado com a sua pesquisa.</p>
-<!--
             {%else%}
 
-                {%for service in services %}
-                    <article class="service-item">
+                {%for client in clients %}
+                    <article class="client-item">
                 <header>
                     <img 
-                        src="{{service.avatar}}" 
-                        alt="{{service.name}}">
+                        src="{{client.avatar}}" 
+                        alt="{{client.name}}">
                     <div>
-                        <strong>{{service.name}}</strong>
-                        <span>{{service.telephone}}</span>
+                        <strong>{{client.name}}</strong>
+                        <span>{{client.phone}}</span>
                     </div>
                 </header>
             
-                <p>{{service.address}}</p>
+                <p>{{client.address}}</p>
             
                 <footer>
-                    <p>Preço<strong>R$ {{service.cost}}</strong>
+                    <p>Preço<strong>R$ {{client.cost}}</strong>
                     </p>
                 </footer>
                     </article>

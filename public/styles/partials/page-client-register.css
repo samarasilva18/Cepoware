@@ -51,6 +51,54 @@
     transition: 0.2;
 }
 
+#page-client-register .select-block label a {
+    background: none;
+    border: 0;
+    margin: 2rem;
+    text-decoration: none;
+
+    color: var(--color-primary);
+
+    font: 700 1.6rem Archivo;
+
+    cursor: pointer;
+
+    transition: 0.2;
+}
+
+#page-client-register .radio-button{
+    background: none;
+    border: 0;
+    margin-bottom: 2rem;
+
+    color: var(--color-text-complement);
+
+    font: 1.6rem Archivo;
+
+    cursor: pointer;
+
+    transition: 0.2;
+}
+
+#page-client-register .radio-button {
+    margin: 1rem;
+}
+
+#page-client-register .radio-block {
+    margin-bottom: 2rem;
+}
+
+#page-client-register .mensal-label {
+    color: var(--color-text-complement);
+    font: 1.6rem Archivo;
+    margin: 2rem;
+    margin-left: 0;
+}
+
+#page-client-register .select-block {
+    margin-top: 2rem;
+}
+
 #page-client-register .input-block label button:hover {
     color: var(--color-primary-light);
 }

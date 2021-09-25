@@ -1,12 +1,20 @@
+/*jshint esversion: 6 */
 //Servidor
-const express = require('express')
-const server = express()
+const express = require('express');
+const server = express();
 
 const {
     pageLanding,
+    pageClients,
+    pageClientRegister,
+    saveClients,
     pageServices,
+    pageServicesRegister,
+    pageNewTypeRegister,
+    saveServices,
     pageExpenses,
-    pageClients
+    pageExpensesRegister,
+    saveExpenses
 } = require('./pages')
 
 //Configuração do Nunjucks (Template Engine)
@@ -24,8 +32,13 @@ server
 .use(express.static("public"))
 //Rotas da Aplicação
 .get("/", pageLanding)
-.get("/services", pageServices)
-.get("/expenses", pageExpenses)
 .get("/clients", pageClients)
+.get("/client-register", pageClientRegister)
+.get("/services", pageServices)
+.get("/services-register", pageServicesRegister)
+.get("/newtype-register", pageNewTypeRegister)
+.get("/expenses", pageExpenses)
+.get("/expenses-register", pageExpensesRegister)
+.post("/save-clients", saveClients)
 //Start do Servidor
 .listen(5500)
