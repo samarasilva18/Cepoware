@@ -50,6 +50,27 @@
     margin-top: 3.2rem;
 }
 
+.expense-item button {
+    width: 6rem;
+    height: 2.6rem;
+    background: var(--color-primary-lighter);
+    color: var(--color-button-text);
+    border: 0;
+    border-radius: .8rem;
+    cursor: pointer;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    transition: background 0.2s;
+}
+
+.expense-item button:hover {
+    background-color: var(--color-primary-light);
+}
+
 #filter-services a:hover{
     background-color: var(--color-primary-light);
 }
@@ -57,6 +78,7 @@
 #page-services main {
     margin: 3.2rem auto;
     width: 90%;
+    max-width: 740px;
 }
 
 .service-item {
@@ -94,39 +116,55 @@
     margin-top: .4rem;
 }
 
+.service-item > a {
+    padding: 0 2rem;
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+    margin-left: 1rem;
+}
+
 .service-item > p {
     padding: 0 2rem;
     font-size: 1.6rem;
     line-height: 2.8rem;
+    justify-content: space-around;
 }
 
 .service-item footer {
     padding: 3.2rem 2rem;
     background-color: var(--color-box-footer);
     border-top: 1px solid var(--color-line-in-white);
-    margin-top: 3.2rem;
-
+    margin-top: 2rem;
+    height: 12rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .service-item footer p {
-    font-size: 1.4rem;
+    font-size: 2rem;
     line-height: 2.4rem;
     color: var(--color-text-complement);
+    justify-content: space-between;
+    height: 3rem;
 }
 
 .service-item footer p strong {
-    font-size: 1.6rem;
+    font-size: 2.6rem;
     color: var(--color-primary);
     display: block;
 }
 
-.service-item footer .button {
-    width: 20rem;
-    height: 5.6rem;
-    background: var(--color-secondary);
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 3.2rem 0;
+
+}
+
+.service-item footer button {
+    height: 5rem;
+    background: var(--color-primary-lighter);
     color: var(--color-button-text);
     border: 0;
     border-radius: .8rem;
@@ -143,14 +181,66 @@
     margin-left: 1.6rem;
 }
 
-.service-item footer .button:hover {
+.service-item footer button.complete {
+    background: var(--color-secondary);
+    width: 15rem;
+}
+
+.service-item footer button.edit {
+    width: 15rem;
+}
+
+.service-item footer button.complete:hover {
     background: var(--color-secondary-dark);
 }
+
+.service-item footer button:hover {
+    background: var(--color-primary-light);
+}
+
+
 
 #page-services main .no-results {
     max-width: 30rem;
     margin: 12rem auto;
     text-align: center;
+}
+
+.expense-item {
+    background-color: var(--color-box-base);
+    border: 1px solid var(--color-line-in-white);
+    color: var(--color-primary-dark);
+    border-radius: .8rem;
+    margin-top: 3rem;
+}
+
+.expense-item header {
+    padding: 3.2rem 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.expense-item header div {
+    margin-left: 2.4rem;
+}
+
+.expense-item header div strong {
+    font: 700 2rem Archivo;
+    color: var(--color-primary-dark);
+    display: block;
+}
+
+.expense-item header div span {
+    font-size: 1.6rem;
+    display: block;
+    margin-top: .4rem;
+}
+
+.expense-item > p {
+    padding: 0 2rem;
+    font-size: 1.6rem;
+    line-height: 2.8rem;
 }
 
 @media (min-width:700px) {

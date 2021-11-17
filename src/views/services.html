@@ -30,7 +30,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cepoware | Opções de Serviços</title>
+    <title>Cepoware | Lista de Serviços</title>
 
     <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 
@@ -59,7 +59,7 @@
                     Total Ganho:
                 </a>
                 <a class="total-value">
-                    R$ -------
+                    R$ {{totalvalue}}
                 </a>
                 </div>
                 <form id="filter-services">
@@ -92,11 +92,9 @@
         </header>
 
         <main>
-<!--
+            
             {% if services == "" %}
--->
                 <p class="no-results"> Nenhum serviço encontrado com a sua pesquisa.</p>
-<!--
             {%else%}
 
                 {%for service in services %}
@@ -106,22 +104,29 @@
                         src="{{service.avatar}}" 
                         alt="{{service.name}}">
                     <div>
-                        <strong>{{service.name}}</strong>
-                        <span>{{service.telephone}}</span>
+                        <strong>{{service.quant}} {{service.cepotype}}</strong>
+                        <span>{{service.serviceclient}}</span>
                     </div>
                 </header>
             
-                <p>{{service.address}}</p>
-            
+                <a> <strong>Data de Entrega: </strong> {{service.day}}/{{service.month}}/21 </a> <a> <strong> Horario: </strong> {{service.time}}</a>
+                <p> <strong> Data de Pagamento: </strong> {{service.dayp}}/{{service.monthp}}/21 <p> <strong> Horario: </strong> {{service.timep}}</p> </p>
+                
+
                 <footer>
-                    <p>Preço<strong>R$ {{service.cost}}</strong>
+                    <p>Valor:<strong>R$ {{service.value}}</strong>
                     </p>
+                    <div class="buttons-container">
+                    <button class="edit"> Editar </button>
+                    {% if service.paid == 0 %}
+                    <button class="complete"> Completar </button>
+                    {%endif%}
+                    </div>
                 </footer>
                     </article>
                 {%endfor%}
 
             {% endif %}
--->
         </main>
     </div>
 

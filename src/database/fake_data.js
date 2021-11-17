@@ -1,22 +1,35 @@
-const proffys = [
-    { name: "Diego Fernandes", 
-    avatar: "https://avatars2.githubusercontent.com/u/2254731?s=460&amp;u=0ba16a79456c2f250e7579cb388fa18c5c2d7d65&amp;v=4", 
-    whatsapp: "89987654534", 
-    bio: "Entusiasta das melhores tecnologias de química avançada.<br><br>Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma das minhas explosões.", 
-    subject: "Química", 
-    cost: "20", 
-    weekday: [0], 
-    time_from: [720], 
-    time_to: [1220]
+/*jshint esversion: 6 */
+const clients = [
+    { name: "Fox", 
+    avatar: "https://i1.wp.com/foxcalcados.com.br/wp-content/uploads/2020/10/cropped-logo-fox-distribuidora-1-removebg-preview-removebg-preview.png?fit=502%2C497&ssl=1", 
+    phone: "37040070", 
+    street: "R. Arnold Faria Junqueira", 
+    neighborhood: "Jardim Paulistano", 
+    number: "1160", 
     },
-    { name: "Daniel Evangelista", 
-    avatar: "https://user-images.githubusercontent.com/38081852/83981753-1de29b00-a8f7-11ea-93cf-23d2ff65fa5c.png", 
-    whatsapp: "89987654534", 
-    bio: "Entusiasta das melhores tecnologias de química avançada.<br><br>Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma das minhas explosões.", 
-    subject: "Química", 
-    cost: "20", 
-    weekday: [1], 
-    time_from: [720], 
-    time_to: [1220]
+    { name: "Arizona", 
+    avatar: "https://media-exp1.licdn.com/dms/image/C4D0BAQEBbHf38bNr8A/company-logo_200_200/0/1551385889931?e=2159024400&v=beta&t=uOEsI9wxh4Pb3cZyWUWoLbeRpG9qPrweFTZsRL_uWhA", 
+    phone: "37237398", 
+    street: "Avenida Professor Hilario Giovanella", 
+    neighborhood: "Industrial Abilio Nogueira", 
+    number: "335", 
+    },
+    { name: "Tábuas de Madeira",
+      valor: "65,48",
+      day: "11",
+      month: "8",  
+    },
+    { quant: "1",
+      tipo: "Cepo Quadriculado",
+      dayp: "12",
+      monthp: "8",
+      value: "10,50",
+      avatar: "https://i2.wp.com/socepo.com.br/wp-content/uploads/2020/06/cepo-retangular-nova.png"
     }
-]
+    //ALTER TABLE services
+    //ADD paid INT;
+    /* UPDATE services
+    SET paid = 1
+    WHERE dayp = 30
+     */
+];

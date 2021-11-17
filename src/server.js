@@ -40,5 +40,7 @@ server
 .get("/expenses", pageExpenses)
 .get("/expenses-register", pageExpensesRegister)
 .post("/save-clients", saveClients)
+.post("/save-expenses", saveExpenses)
+.post("/save-services", saveServices)
 //Start do Servidor
 .listen(5500)

@@ -59,7 +59,7 @@
                         Total Gasto:
                     </a>
                     <a class="total-value2">
-                        - R$ -------
+                        - R$ {{totalcost}}
                     </a>
                     </div>
                     <form id="filter-services">
@@ -92,36 +92,32 @@
             </header>
     
             <main>
-    <!--
-                {% if services == "" %}
-    -->
+
+                {% if expenses == "" %}
                     <p class="no-results"> Nenhum gasto encontrado com a sua pesquisa.</p>
-    <!--
                 {%else%}
     
-                    {%for service in services %}
-                        <article class="service-item">
+                    {%for expense in expenses %}
+                        <article class="expense-item">
                     <header>
-                        <img 
-                            src="{{service.avatar}}" 
-                            alt="{{service.name}}">
                         <div>
-                            <strong>{{service.name}}</strong>
-                            <span>{{service.telephone}}</span>
+                            <strong>{{expense.day}}/{{expense.month}}/21</strong>
+                        </div>
+                        <div>
+                            <strong>{{expense.name}}</strong>
+                        </div>
+                        <div>
+                            <strong>Valor: R$ {{expense.cost}}</strong>
+                        </div>
+                        <div>
+                            <button> Editar </button>
                         </div>
                     </header>
-                
-                    <p>{{service.address}}</p>
-                
-                    <footer>
-                        <p>Preço<strong>R$ {{service.cost}}</strong>
-                        </p>
-                    </footer>
                         </article>
                     {%endfor%}
     
                 {% endif %}
-    -->
+
             </main>
         </div>
     

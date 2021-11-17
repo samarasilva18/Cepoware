@@ -61,7 +61,7 @@
             </header>
     
             <main>
-                <form action="/save-client" id="create-client" method="POST">
+                <form action="/save-expenses" id="create-expense" method="POST">
                     <fieldset>
                         <legend>Preencha os dados:</legend>
                         <div class="input-block">
@@ -70,8 +70,8 @@
                         </div>
     
                         <div class="input-block" id="phonenumber">
-                            <label for="phone">Valor:</label>
-                            <input name="phone" id="phone" type="number" required>
+                            <label for="cost">Valor:</label>
+                            <input name="cost" id="cost" type="number" step="0.01" required>
                         </div>
                     </fieldset>
     
@@ -79,13 +79,13 @@
                         <legend>Data do Gasto:</legend>
                         <div class="address-item">
                         <div class="input-block">
-                            <label for="street">Dia:</label>
-                            <input name="street" id="street" required>
+                            <label for="day">Dia:</label>
+                            <input name="day" id="day" required>
                         </div>
     
                         <div class="input-block">
-                            <label for="neighborhood">Mês:</label>
-                            <input name="neighborhood" id="neighborhood" required>
+                            <label for="month">Mês:</label>
+                            <input name="month" id="month" required>
                         </div>
                         </div>
     
@@ -98,7 +98,7 @@
                         Importante! <br>
                         Preencha todos os dados.
                     </p>
-                    <button type="submit" form="create-client">Salvar Gasto</button>
+                    <button type="submit" form="create-expense">Salvar Gasto</button>
                 </footer>
     
             </main>
