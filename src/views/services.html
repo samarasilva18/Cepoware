@@ -47,7 +47,7 @@
     <div id="container">
         <header class="page-header">
             <div class="top-bar-container">
-                <a href="/">
+                <a href="/landing">
                 <img src="/images/icons/back.png" alt="Voltar"></a>
                 <img src="/images/logo.png" alt="Cepoware">
             </div>
@@ -69,7 +69,7 @@
                             <option value="" disabled="" hidden="">Filtrar Por</option>
 
                             {%for filtro in filtros %}
-                                <option value="{{loop.index}}" {{ "selected" if filters.filtro == loop.index }} > Filtrar Por
+                                <option value="{{loop.index}}" {{ "selected" if filters.filtro == loop.index }} > {{filtro}}
                                 </option>
                             {%endfor%}
 
@@ -80,7 +80,7 @@
                             <option value="" disabled="" hidden="">Ordenar Por</option>
 
                             {%for order in orders %}
-                                <option value="{{loop.index}}" {{ "selected" if filters.order == loop.index }} > Ordenar Por
+                                <option value="{{loop.index}}" {{ "selected" if filters.order == loop.index }} > {{order}}
                                 </option>
                             {%endfor%}
 
@@ -123,12 +123,20 @@
                     {%endif%}
                     </div>
                 </footer>
+                {% if service.time == now %}
+                <div onload="deliveryAlert()"></div>
+                {%endif%}
                     </article>
                 {%endfor%}
 
             {% endif %}
         </main>
     </div>
+    <script>
+        function deliveryAlert() {
+            alert("Bem-Vindo!")
+        }
+    </script>
 
 </body>
 </html>

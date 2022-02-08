@@ -9,7 +9,7 @@ const cepotypes = [
 ];
 
 
-const filtros = [
+const complecao = [
     "Completos",
     "Pendentes",
     "Atrasados",
@@ -17,10 +17,18 @@ const filtros = [
 ];
 
 const orders = [
+    "Mais novo",
+    "Mais antigo",
     "Urgência",
-    "Valor",
-    "Clientes",
-    "Tipo",
+    "Valor"
+];
+
+const filtros = [
+    "Mostrar tudo",
+    "Completos",
+    "Pendentes",
+    "Fox Calçados",
+    "Arizona"
 ];
 
 //Funcionalidades

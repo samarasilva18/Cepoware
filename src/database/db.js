@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-const Database = require('sqlite-async')
+const Database = require('sqlite-async');
 
 function execute(db) {
     //Criar as tabelas do banco de dados.
@@ -36,6 +36,12 @@ function execute(db) {
         dayp INT,
         monthp INT,
         timep INT
+    );
+
+    CREATE TABLE IF NOT EXISTS accounts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT,
+        password TEXT
     );
 
     `)

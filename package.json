@@ -12,7 +12,10 @@
   "dependencies": {
     "dependencies": "0.0.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "growl": "^1.10.5",
     "jshint": "^2.13.0",
+    "node-notifier": "^10.0.0",
     "nunjucks": "^3.2.2",
     "sqlite-async": "^1.1.0"
   },

@@ -1,9 +1,12 @@
 /*jshint esversion: 6 */
 //Servidor
 const express = require('express');
-const server = express();
+var server = express();
+var session = require('express-session');
+var bodyParser = require('body-parser');
 
 const {
+    pageLogin,
     pageLanding,
     pageClients,
     pageClientRegister,
@@ -14,7 +17,8 @@ const {
     saveServices,
     pageExpenses,
     pageExpensesRegister,
-    saveExpenses
+    saveExpenses,
+    performLogin
 } = require('./pages')
 
 //Configuração do Nunjucks (Template Engine)
@@ -30,8 +34,17 @@ server
 .use(express.urlencoded({ extended: true}))
 //Configuração de arquivos estáticos (css, scripts, imagens)
 .use(express.static("public"))
+//Configuração das sessoes de login
+.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUnitialized: true
+}))
+.use(bodyParser.urlencoded({extended : true}))
+.use(bodyParser.json())
 //Rotas da Aplicação
-.get("/", pageLanding)
+.get("/", pageLogin)
+.get("/landing", pageLanding)
 .get("/clients", pageClients)
 .get("/client-register", pageClientRegister)
 .get("/services", pageServices)
@@ -42,5 +55,6 @@ server
 .post("/save-clients", saveClients)
 .post("/save-expenses", saveExpenses)
 .post("/save-services", saveServices)
+.post("/perform-login", performLogin)
 //Start do Servidor
 .listen(5500)

@@ -2,7 +2,42 @@
 //Dados
 const Database = require('./database/db');
 
-const { filtros, orders, cepotypes, getType, getClient} = require('./utils/format')
+const { getType, getClient, convertHourstoMinutes, filtros, orders} = require('./utils/format')
+
+function pageLogin(req, res){
+    return res.render("password.html")
+}
+
+async function performLogin(req, res) {
+    var username = req.body.username
+    var password = req.body.password
+    var notifier = require('node-notifier');
+
+    console.log(username)
+    try {
+
+        var query = 'SELECT * FROM accounts WHERE accounts.username ' + "= '" + username + "'" + ' AND accounts.password' + "= '" + password + "'"
+        const db = await Database
+        const results = await db.all(query)
+        console.log(results)
+        console.log(username)
+                if (results.length > 0) {
+                    req.session.loggedin = true;
+                    req.session.username = username;
+                    return res.redirect('/landing');
+                }
+                else {
+                    notifier.notify({
+                        title: "Senha incorreta",
+                        message: "Tente novamente",
+                        sound: true
+                    });
+                    return res.redirect("/");
+                }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 async function pageLanding(req, res){
     const filters = req.query
@@ -56,7 +91,7 @@ async function pageClients(req, res) {
         const db = await Database
         const clients = await db.all(query)
 
-        return res.render('clients.html', { clients, filtros, filters, orders })
+        return res.render('clients.html', { clients})
 
     } catch (error) {
         console.log(error)
@@ -92,21 +127,60 @@ async function saveClients(req, res) {
 async function pageServices(req, res){
     const filters = req.query
     const filters2 = req.query2
+    var notifier = require('node-notifier');
+    
+    notifier.notify({
+        title: "Bem-Vindo ao Cepoware",
+        message: "Serviços abertos",
+        sound: true
+    });
+
+    const getCurrentTime = `
+        SELECT DATETIME(now)
+    `
+
+    const getCurrentDay = `
+        SELECT DATETIME(now, day)
+    `
+
+    const getCurrentMonth = `
+        SELECT DATETIME(now, month)
+    `
+    const getCurrentYear = `
+    SELECT DATETIME(now, year)
+    `
+    const alertquery = `
+        SELECT services.time
+        FROM services
+        WHERE services.time = NOW
+    `
+
+    const paydayquery = `
+        SELECT services.timep
+        FROM services
+        WHERE services.timep = NOW
+    `
 
     const query = `
         SELECT services.*
         FROM services
-    `
+        WHERE services.paid = ${1}
+    `;
     const query2 = `
         SELECT ROUND(SUM(value), 2)
         FROM services
-    `
+    `;
 
     //Caso haja erro na hora da consulta ao banco de dados
     try {
         const db = await Database
         const services = await db.all(query)
         var totalvalue = await db.all(query2)
+        var currentTime = await db.all(getCurrentTime)
+        var currentDay = await db.all(getCurrentDay)
+        var currentMonth = await db.all(getCurrentMonth)
+        var currentYear = await db.all(getCurrentYear)
+        console.log(currentTime)
 
         services.map((service) => {
             service.cepotype = getType(service.cepotype);
@@ -123,7 +197,7 @@ async function pageServices(req, res){
         totalvalue = totalvalue.slice(2)
         totalvalue = totalvalue.slice(0, -4)
 
-        return res.render('services.html', { services, filters2, filtros, filters, orders, totalvalue })
+        return res.render('services.html', { services, filters2, filters, totalvalue, filtros, orders })
 
     } catch (error) {
         console.log(error)
@@ -241,6 +315,7 @@ function pageNewTypeRegister(req, res){
 }
 
 module.exports = {
+    pageLogin,
     pageLanding,
     pageClients,
     pageClientRegister,
@@ -251,5 +326,6 @@ module.exports = {
     saveServices,
     pageExpenses,
     pageExpensesRegister,
-    saveExpenses
+    saveExpenses,
+    performLogin
 }

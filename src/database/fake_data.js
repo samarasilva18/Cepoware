@@ -31,5 +31,15 @@ const clients = [
     /* UPDATE services
     SET paid = 1
     WHERE dayp = 30
+
+    Geraldo
+    Cepo132230*
+
+    admin
+    Senh@ADM
+
+     WHERE services.cepotype = ${filters.cepotype} 
+        AND services.time = ${filters.timeToMinutes}
+        AND services.timep = ${filters.timeToMinutes}
      */
 ];
