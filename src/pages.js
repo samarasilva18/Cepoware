@@ -1,8 +1,8 @@
 /*jshint esversion: 8 */
-//Dados
+//Dados: http://127.0.0.1:5500/
 const Database = require('./database/db');
 
-const { getType, getClient, convertHourstoMinutes, filtros, orders} = require('./utils/format')
+const { getType, cepotypes, getClient, convertHourstoMinutes, filtros, orders} = require('./utils/format')
 
 function pageLogin(req, res){
     return res.render("password.html")
@@ -86,6 +86,7 @@ async function pageClients(req, res) {
         SELECT clients.*
         FROM clients
     `
+
     //Caso haja erro na hora da consulta ao banco de dados
     try {
         const db = await Database
@@ -129,59 +130,74 @@ async function pageServices(req, res){
     const filters2 = req.query2
     var notifier = require('node-notifier');
     
-    notifier.notify({
-        title: "Bem-Vindo ao Cepoware",
-        message: "Serviços abertos",
-        sound: true
-    });
-
-    const getCurrentTime = `
-        SELECT DATETIME(now)
-    `
-
-    const getCurrentDay = `
-        SELECT DATETIME(now, day)
-    `
-
-    const getCurrentMonth = `
-        SELECT DATETIME(now, month)
-    `
-    const getCurrentYear = `
-    SELECT DATETIME(now, year)
-    `
-    const alertquery = `
-        SELECT services.time
-        FROM services
-        WHERE services.time = NOW
-    `
-
-    const paydayquery = `
-        SELECT services.timep
-        FROM services
-        WHERE services.timep = NOW
-    `
 
     const query = `
         SELECT services.*
         FROM services
-        WHERE services.paid = ${1}
-    `;
+    `
     const query2 = `
-        SELECT ROUND(SUM(value), 2)
-        FROM services
-    `;
+        SELECT ROUND((SELECT SUM(value) FROM services))
+    `
+    //const query3 = ' SELECT services.* FROM services WHERE services.month ' + "= '" + month + "'" + ' AND services.day' + "= '" + date + "'" + ' AND services.time' + "= '" + minute + "'"
+
+     notifier.notify({
+         title: "Bem-Vindo ao Cepoware",
+         message: "Serviços abertos",
+         sound: true
+     });
 
     //Caso haja erro na hora da consulta ao banco de dados
     try {
         const db = await Database
         const services = await db.all(query)
         var totalvalue = await db.all(query2)
-        var currentTime = await db.all(getCurrentTime)
-        var currentDay = await db.all(getCurrentDay)
-        var currentMonth = await db.all(getCurrentMonth)
-        var currentYear = await db.all(getCurrentYear)
-        console.log(currentTime)
+        const paid = "paid"
+        const time = "time"
+        const day = "day"
+        const month = "month"
+        const year = "year"
+        const timep = "timep"
+        const dayp = "dayp"
+        const monthp = "monthp"
 
+        alertClient()
+
+        setInterval(alertClient, 1000 * 60)
+
+        function alertClient() {
+
+        let date_ob = new Date();
+        let ano =date_ob.getFullYear();
+        let mes =(date_ob.getMonth() + 1);
+        let date = (date_ob.getDate());
+        let hour = (date_ob.getHours() + 1);
+        let minutes = (date_ob.getMinutes());
+        console.log(minutes)
+        hour = hour + ":" + minutes
+
+        console.log("Um minuto passou")
+
+        for (var i = 0, len = services.length; i < len; i++) {
+            if (services[i][paid] == 0 && services[i][time] >= hour && services[i][day] == date && services[i][month] == mes && services[i][year] == ano){
+                notifier.notify({
+                title: "ENTREGA DE SERVIÇO:",
+                message: "Há um serviço a ser entregue daqui a uma hora! ",
+                sound: true
+                });
+            }
+        }
+
+        for (var i = 0, len = services.length; i < len; i++) {
+            if (services[i][paid] == 0 && services[i][timep] >= hour && services[i][dayp] == date && services[i][monthp] == mes && services[i][year] == ano){
+                notifier.notify({
+                title: "DIA DE PAGAMENTO:",
+                message: "Há um pagamento a ser coletado daqui a uma hora! ",
+                sound: true
+                });
+            }
+        }
+        }
+        
         services.map((service) => {
             service.cepotype = getType(service.cepotype);
         });
@@ -310,6 +326,40 @@ async function saveServices (req, res) {
     }
 }
 
+async function getDelete(req, res) {
+    const deleteService = require('./database/deleteService');
+
+    const deleteValue = req.body.deleteButton
+
+    console.log(deleteValue)
+
+    try {
+        const db = await Database;
+        await deleteService(db, { deleteValue });
+
+        return res.redirect("/services");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getPaid(req, res) {
+    const payService = require('./database/payService');
+
+    const payValue = req.body.payButton
+
+    console.log(payValue)
+
+    try {
+        const db = await Database;
+        await payService(db, { payValue });
+
+        return res.redirect("/services");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function pageNewTypeRegister(req, res){
     return res.render("newtype-register.html")
 }
@@ -327,5 +377,7 @@ module.exports = {
     pageExpenses,
     pageExpensesRegister,
     saveExpenses,
-    performLogin
+    performLogin,
+    getDelete,
+    getPaid
 }

@@ -18,7 +18,9 @@ const {
     pageExpenses,
     pageExpensesRegister,
     saveExpenses,
-    performLogin
+    performLogin,
+    getDelete,
+    getPaid
 } = require('./pages')
 
 //Configuração do Nunjucks (Template Engine)
@@ -56,5 +58,7 @@ server
 .post("/save-expenses", saveExpenses)
 .post("/save-services", saveServices)
 .post("/perform-login", performLogin)
+.post("/services/delete", getDelete)
+.post("/services/pay", getPaid)
 //Start do Servidor
 .listen(5500)

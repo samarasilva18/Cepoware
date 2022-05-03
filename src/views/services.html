@@ -109,17 +109,21 @@
                     </div>
                 </header>
             
-                <a> <strong>Data de Entrega: </strong> {{service.day}}/{{service.month}}/21 </a> <a> <strong> Horario: </strong> {{service.time}}</a>
-                <p> <strong> Data de Pagamento: </strong> {{service.dayp}}/{{service.monthp}}/21 <p> <strong> Horario: </strong> {{service.timep}}</p> </p>
+                <a> <strong>Data de Entrega: </strong> {{service.day}}/{{service.month}}/22 </a> <a> <strong> Horario: </strong> {{service.time}}</a>
+                <p> <strong> Data de Pagamento: </strong> {{service.dayp}}/{{service.monthp}}/22 <p> <strong> Horario: </strong> {{service.timep}}</p> </p>
                 
 
                 <footer>
                     <p>Valor:<strong>R$ {{service.value}}</strong>
                     </p>
                     <div class="buttons-container">
-                    <button class="edit"> Editar </button>
+                        <form id="deletion-form" action="/services/delete" method="POST">
+                        <button name="deleteButton" type="submit" class="edit" value="{{service.id}}"  form="deletion-form"> Deletar </button>
+                        </form>
                     {% if service.paid == 0 %}
-                    <button class="complete"> Completar </button>
+                    <form id="payment-form" action="/services/pay" method="POST"></form>
+                        <button name="payButton" type="submit" class="complete" value="{{service.id}}" form="payment-form"> Completar </button>
+                    </form>
                     {%endif%}
                     </div>
                 </footer>
